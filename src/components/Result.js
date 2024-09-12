@@ -39,7 +39,7 @@ const Result = () => {
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            padding: '3px 20px', // サイズを調整
+            padding: '2px 15px', // サイズを調整
             backgroundColor: 'red', // 赤い角丸枠
             borderRadius: '15px', // 角丸
           }}>
@@ -65,7 +65,7 @@ const Result = () => {
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            padding: '3px 20px', // サイズを調整
+            padding: '2px 15px', // サイズを調整
             backgroundColor: 'blue', // 青い角丸枠
             borderRadius: '15px', // 角丸
           }}>
@@ -74,7 +74,7 @@ const Result = () => {
               height: '30px', 
               backgroundColor: 'blue', // 青い■
               marginRight: '15px',
-              borderRadius: '6px'
+              borderRadius: '1px'
             }}></div>
             <p style={{ fontWeight: 'bold', color: 'white', fontSize: 'clamp(12px, 2vw, 24px)' }}>
               約2週間後の状態：<span style={{ color: 'white' }}>{categories[nextIndex]}</span>
@@ -86,8 +86,8 @@ const Result = () => {
       {/* 円形レイアウトのコンテナ */}
       <div style={{ 
         position: 'relative', 
-        width: '350px',  // コンテナのサイズを大きく
-        height: '350px', 
+        width: '300px',  // コンテナのサイズを大きく
+        height: '300px', 
         margin: '0 auto',
         borderRadius: '50%', // 円形に
         border: '2px solid lightgray', // 外枠1本に変更
@@ -118,8 +118,8 @@ const Result = () => {
                 transform: 'translate(-50%, -50%)',
                 backgroundColor: backgroundColor,
                 color: textColor,
-                width: '150px',  // 枠のサイズを1.5倍に
-                height: '60px',  // 枠のサイズを1.5倍に
+                width: '130px',  // 枠のサイズを1.5倍に
+                height: '50px',  // 枠のサイズを1.5倍に
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -183,13 +183,13 @@ const Result = () => {
                 <td style={{
                   backgroundColor: index === currentIndex ? 'red' : index === nextIndex ? 'blue' : 'lightgray', 
                   color: 'white', 
-                  padding: '10px',
+                  padding: '8px',
                   textAlign: 'center',
                   fontWeight: 'bold'
                 }}>
                   {genre.category}
                 </td>
-                <td style={{ padding: '10px', textAlign: 'left' }}>{genre.genres}</td>
+                <td style={{ padding: '5px', textAlign: 'left' }}>{genre.genres}</td>
               </tr>
             ))}
           </tbody>
