@@ -174,8 +174,8 @@ const Result = () => {
       </div>
 
       {/* 映画ジャンルの表を表示 */}
-      <div style={{ marginTop: '40px', textAlign: 'left' }}>
-        <h3>おすすめのジャンル（映画・アニメ・ドラマ）</h3>
+      <div style={{ marginTop: '50px', textAlign: 'left' }}>
+        <h3>おすすめジャンル(映画・アニメ・ドラマ)</h3>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <tbody>
             {movieGenres.map((genre, index) => (
