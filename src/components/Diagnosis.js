@@ -90,26 +90,68 @@ const Diagnosis = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>バイオリズム診断</h2>
+    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+      <h2 style={{ textAlign: 'center' }}>バイオリズム診断（７つの質問に応えて下さい）</h2>
+
       {questions.map((question, questionIndex) => (
-        <div key={questionIndex} style={{ marginBottom: '20px' }}>
-          <p>{question}</p>
-          {options[questionIndex].map((option, optionIndex) => (
-            <label key={optionIndex} style={{ display: 'block', marginBottom: '8px' }}>
-              <input
-                type="radio"
-                name={`question-${questionIndex}`}
-                value={option.value}
-                checked={answers[questionIndex] === option.value}
-                onChange={(e) => handleChange(questionIndex, e.target.value)}
-              />
-              {option.label}
-            </label>
-          ))}
+        <div key={questionIndex} style={{ 
+          marginBottom: '20px',
+          padding: '15px',
+          backgroundColor: '#f8f9fa', // カード風の背景色
+          borderRadius: '10px',
+          boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)' // カードに影を追加
+        }}>
+          {/* 質問部分 */}
+          <p style={{ fontWeight: 'bold', fontSize: 'clamp(14px, 2vw, 18px)', marginBottom: '10px' }}>
+            {question}
+          </p>
+
+          {/* 回答選択肢部分 */}
+          <div>
+            {options[questionIndex].map((option, optionIndex) => (
+              <label key={optionIndex} style={{ 
+                display: 'block', 
+                marginBottom: '10px',
+                padding: '10px', 
+                backgroundColor: '#ffffff', 
+                borderRadius: '8px',
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+                transition: 'background-color 0.3s ease', // ホバー時の背景色変更
+                cursor: 'pointer'
+              }}>
+                <input
+                  type="radio"
+                  name={`question-${questionIndex}`}
+                  value={option.value}
+                  checked={answers[questionIndex] === option.value}
+                  onChange={(e) => handleChange(questionIndex, e.target.value)}
+                  style={{ marginRight: '10px' }}
+                />
+                {option.label}
+              </label>
+            ))}
+          </div>
         </div>
       ))}
-      <button onClick={handleSubmit}>診断結果を見る</button>
+
+      <div style={{ textAlign: 'center', marginTop: '30px' }}>
+        <button 
+          onClick={handleSubmit} 
+          style={{
+            padding: '10px 20px',
+            backgroundColor: '#007bff',
+            color: 'white',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '16px',
+            cursor: 'pointer',
+            transition: 'background-color 0.3s ease',
+            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)' // ボタンの影
+          }}
+        >
+          診断結果を見る
+        </button>
+      </div>
     </div>
   );
 };
