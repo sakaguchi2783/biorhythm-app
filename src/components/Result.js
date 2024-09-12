@@ -18,10 +18,15 @@ const movieGenres = [
 const Result = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const result = params.get('result');
+  const result = params.get('result'); // パラメータから診断結果を取得
 
   const currentIndex = categories.indexOf(result); // 現在のインデックス
-  const nextIndex = (currentIndex + 1) % categories.length; // 次のインデックス
+  const nextIndex = (currentIndex + 1) % categories.length; // 次に訪れるインデックス
+
+  // currentIndex が -1 の場合のエラーハンドリング
+  if (currentIndex === -1) {
+    return <div>診断結果が見つかりませんでした。</div>;
+  }
 
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
@@ -29,7 +34,6 @@ const Result = () => {
 
       {/* 現在の状態と次に訪れる状態を2段で表示 */}
       <div style={{ marginBottom: '20px' }}>
-        {/* 1段目 - 現在の状態 */}
         <div style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -39,14 +43,14 @@ const Result = () => {
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            padding: '3px 20px', // サイズを調整
-            backgroundColor: 'red', // 赤い角丸枠
-            borderRadius: '15px', // 角丸
+            padding: '3px 20px',
+            backgroundColor: 'red', 
+            borderRadius: '15px',
           }}>
             <div style={{
-              width: '30px',  // 赤い■のサイズを大きく
+              width: '30px',  
               height: '30px', 
-              backgroundColor: 'red', // 赤い■
+              backgroundColor: 'red', 
               marginRight: '15px',
               borderRadius: '6px'
             }}></div>
@@ -56,7 +60,6 @@ const Result = () => {
           </div>
         </div>
 
-        {/* 2段目 - 次に訪れる状態 */}
         <div style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -65,14 +68,14 @@ const Result = () => {
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            padding: '3px 20px', // サイズを調整
-            backgroundColor: 'blue', // 青い角丸枠
-            borderRadius: '15px', // 角丸
+            padding: '3px 20px',
+            backgroundColor: 'blue', 
+            borderRadius: '15px',
           }}>
             <div style={{
-              width: '30px',  // 青い■のサイズを大きく
+              width: '30px',  
               height: '30px', 
-              backgroundColor: 'blue', // 青い■
+              backgroundColor: 'blue', 
               marginRight: '15px',
               borderRadius: '6px'
             }}></div>
@@ -83,30 +86,28 @@ const Result = () => {
         </div>
       </div>
 
-      {/* 円形レイアウトのコンテナ */}
+      {/* 円形レイアウト */}
       <div style={{ 
         position: 'relative', 
-        width: '350px',  // コンテナのサイズを大きく
+        width: '350px',  
         height: '350px', 
         margin: '0 auto',
-        borderRadius: '50%', // 円形に
-        border: '2px solid lightgray', // 外枠1本に変更
+        borderRadius: '50%', 
+        border: '2px solid lightgray', 
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-        {/* 各カテゴリーを円の周りに配置 */}
         {categories.map((category, index) => {
-          const isCurrent = index === currentIndex; // 現在の状態
-          const isNext = index === nextIndex; // 次に訪れる状態
+          const isCurrent = index === currentIndex;
+          const isNext = index === nextIndex;
 
-          // 円形の位置を計算
           const angle = (index / categories.length) * 360;
-          const x = 140 * Math.cos((angle * Math.PI) / 180);  // 距離を少し広げる
-          const y = 140 * Math.sin((angle * Math.PI) / 180);  // 距離を少し広げる
+          const x = 140 * Math.cos((angle * Math.PI) / 180);  
+          const y = 140 * Math.sin((angle * Math.PI) / 180);  
 
-          const backgroundColor = isCurrent ? 'red' : isNext ? 'blue' : 'lightgray'; // 現在は赤、次は青、他は灰色
-          const textColor = isCurrent || isNext ? 'white' : 'black'; // テキスト色
+          const backgroundColor = isCurrent ? 'red' : isNext ? 'blue' : 'lightgray'; 
+          const textColor = isCurrent || isNext ? 'white' : 'black'; 
 
           return (
             <div 
@@ -118,15 +119,15 @@ const Result = () => {
                 transform: 'translate(-50%, -50%)',
                 backgroundColor: backgroundColor,
                 color: textColor,
-                width: '150px',  // 枠のサイズを1.5倍に
-                height: '60px',  // 枠のサイズを1.5倍に
+                width: '150px',  
+                height: '60px',  
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderRadius: '15px', // 角丸を少し大きく
+                borderRadius: '15px', 
                 fontWeight: 'bold',
-                fontSize: 'clamp(14px, 2.5vw, 20px)',  // テキストのサイズを調整
-                zIndex: 2 // 枠を矢印より前に表示
+                fontSize: 'clamp(14px, 2.5vw, 20px)',  
+                zIndex: 2
               }}
             >
               {category}
@@ -134,7 +135,7 @@ const Result = () => {
           );
         })}
 
-        {/* 矢印を表示して枠の後ろに配置 */}
+        {/* 矢印 */}
         <div style={{
           position: 'absolute',
           top: '50%',
@@ -142,38 +143,37 @@ const Result = () => {
           transform: 'translate(-50%, -50%)',
           width: '100%',
           height: '100%',
-          zIndex: 0, // 矢印を枠の後ろに配置
+          zIndex: 0, 
           pointerEvents: 'none',
         }}>
           <svg width="100%" height="100%" viewBox="0 0 100 100">
-            {/* 時計回りの矢印 */}
             <path d="M 50 5 A 45 45 0 0 1 95 50" fill="none" stroke="gray" strokeWidth="2"/>
-            <polygon points="95,50 90,45 90,55" fill="gray"/> {/* 矢印の三角形 */}
+            <polygon points="95,50 90,45 90,55" fill="gray"/>
             <path d="M 95 50 A 45 45 0 0 1 50 95" fill="none" stroke="gray" strokeWidth="2"/>
-            <polygon points="50,95 55,90 45,90" fill="gray"/> {/* 矢印の三角形 */}
+            <polygon points="50,95 55,90 45,90" fill="gray"/>
             <path d="M 50 95 A 45 45 0 0 1 5 50" fill="none" stroke="gray" strokeWidth="2"/>
-            <polygon points="5,50 10,55 10,45" fill="gray"/> {/* 矢印の三角形 */}
+            <polygon points="5,50 10,55 10,45" fill="gray"/>
             <path d="M 5 50 A 45 45 0 0 1 50 5" fill="none" stroke="gray" strokeWidth="2"/>
-            <polygon points="50,5 45,10 55,10" fill="gray"/> {/* 矢印の三角形 */}
+            <polygon points="50,5 45,10 55,10" fill="gray"/>
           </svg>
         </div>
 
-        {/* 円の中央に画像を表示 */}
+        {/* 画像 */}
         <img 
-          src="/images/biorhythm.jpg"  // 画像のパス
+          src="/images/biorhythm.jpg"  
           alt="バイオリズムの画像" 
           style={{
             position: 'absolute', 
-            width: '150px',  // 画像のサイズも調整
+            width: '150px',  
             height: '150px',
-            borderRadius: '0%',  // 画像を丸くする場合
-            objectFit: 'cover',  // 画像の調整
-            zIndex: 1 // 画像が枠より前に表示されるようにする
+            borderRadius: '0%',  
+            objectFit: 'cover',  
+            zIndex: 1 
           }}
         />
       </div>
 
-      {/* 映画ジャンルの表を表示 */}
+      {/* 映画ジャンル */}
       <div style={{ marginTop: '40px', textAlign: 'left' }}>
         <h3>おすすめのジャンル</h3>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>

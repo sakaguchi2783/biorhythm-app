@@ -12,45 +12,45 @@ const questions = [
   '●『リラックスやリフレッシュをする時間は確保できていますか？』'
 ];
 
-// 選択肢 (各質問に対して異なる選択肢)
+// 各質問に対しての選択肢
 const options = [
-  [  // 質問1の選択肢
+  [  // 質問1
     { label: 'a) とても安定している', value: '1' },
     { label: 'b) 少し揺れ動いているが、コントロールできる', value: '2' },
     { label: 'c) 感情が不安定である', value: '3' },
     { label: 'd) 非常に不安定で、コントロールが難しい', value: '4' }
   ],
-  [  // 質問2の選択肢
+  [  // 質問2
     { label: 'a) ほとんど感じない', value: '1' },
     { label: 'b) 時々感じる', value: '2' },
     { label: 'c) 頻繁に感じる', value: '3' },
     { label: 'd) ほぼ常に感じる', value: '4' }
   ],
-  [  // 質問3の選択肢
+  [  // 質問3
     { label: 'a) とても円滑で、スムーズに交流できている', value: '1' },
     { label: 'b) 時々難しいが、全般的に問題ない', value: '2' },
     { label: 'c) しばしば衝突や誤解がある', value: '3' },
     { label: 'd) 現在、他者とのコミュニケーションが難しいと感じる', value: '4' }
   ],
-  [  // 質問4の選択肢
+  [  // 質問4
     { label: 'a) まったく感じない', value: '1' },
     { label: 'b) たまに感じる', value: '2' },
     { label: 'c) 頻繁に感じる', value: '3' },
     { label: 'd) ほぼ毎日感じる', value: '4' }
   ],
-  [  // 質問5の選択肢
+  [  // 質問5
     { label: 'a) 完全にコントロールできている', value: '1' },
     { label: 'b) 大部分はコントロールできている', value: '2' },
     { label: 'c) 時々コントロールが難しい', value: '3' },
     { label: 'd) ほとんどコントロールできていない', value: '4' }
   ],
-  [  // 質問6の選択肢
+  [  // 質問6
     { label: 'a) まったくない', value: '1' },
     { label: 'b) 少しだけある', value: '2' },
     { label: 'c) かなりの頻度である', value: '3' },
     { label: 'd) すぐ気分が変わってしまう自分に嫌気がさす', value: '4' }
   ],
-  [  // 質問7の選択肢
+  [  // 質問7
     { label: 'a) 十分に確保できている', value: '1' },
     { label: 'b) 時々確保できている', value: '2' },
     { label: 'c) あまり確保できていない', value: '3' },
@@ -59,7 +59,7 @@ const options = [
 ];
 
 const Diagnosis = () => {
-  const [answers, setAnswers] = useState(Array(questions.length).fill(''));
+  const [answers, setAnswers] = useState(Array(questions.length).fill('')); // 回答を初期化
   const navigate = useNavigate();
 
   // ラジオボタンの選択を処理
@@ -69,19 +69,20 @@ const Diagnosis = () => {
     setAnswers(newAnswers);
   };
 
+  // 診断結果を計算し、ページ遷移
   const handleSubmit = () => {
-    // 診断ロジック: 回答の合計値を計算
-    const total = answers.reduce((acc, curr) => acc + Number(curr), 0);
+    const total = answers.reduce((acc, curr) => acc + Number(curr), 0); // 合計スコアを計算
     let result = '';
 
+    // 合計値に基づいて診断結果を設定
     if (total <= 7) {
-      result = '激しい戦い・復讐劇';
+      result = '戦争・復讐劇 系';
     } else if (total <= 14) {
-      result = 'サバイバル系';
+      result = '戦後サバイバル系';
     } else if (total <= 21) {
-      result = '弱者が強者を打ち負かす';
+      result = '弱者が強者を倒す系';
     } else {
-      result = '平和な日常';
+      result = '平和な日常系';
     }
 
     // 結果画面に遷移
