@@ -41,11 +41,11 @@ const Result = () => {
             alignItems: 'center',
             padding: '2px 15px', // サイズを調整
             backgroundColor: 'red', // 赤い角丸枠
-            borderRadius: '15px', // 角丸
+            borderRadius: '10px', // 角丸
           }}>
             <div style={{
-              width: '30px',  // 赤い■のサイズを大きく
-              height: '30px', 
+              width: '0px',  // 赤い■のサイズを大きく
+              height: '0px', 
               backgroundColor: 'red', // 赤い■
               marginRight: '15px',
               borderRadius: '6px'
@@ -70,8 +70,8 @@ const Result = () => {
             borderRadius: '15px', // 角丸
           }}>
             <div style={{
-              width: '30px',  // 青い■のサイズを大きく
-              height: '30px', 
+              width: '0px',  // 青い■のサイズを大きく
+              height: '0px', 
               backgroundColor: 'blue', // 青い■
               marginRight: '15px',
               borderRadius: '1px'
@@ -119,13 +119,13 @@ const Result = () => {
                 backgroundColor: backgroundColor,
                 color: textColor,
                 width: '130px',  // 枠のサイズを1.5倍に
-                height: '50px',  // 枠のサイズを1.5倍に
+                height: '40px',  // 枠のサイズを1.5倍に
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderRadius: '15px', // 角丸を少し大きく
+                borderRadius: '12px', // 角丸を少し大きく
                 fontWeight: 'bold',
-                fontSize: 'clamp(14px, 2.5vw, 20px)',  // テキストのサイズを調整
+                fontSize: 'clamp(10px, 1.5vw, 15px)',  // テキストのサイズを調整
                 zIndex: 2 // 枠を矢印より前に表示
               }}
             >
@@ -175,21 +175,21 @@ const Result = () => {
 
       {/* 映画ジャンルの表を表示 */}
       <div style={{ marginTop: '40px', textAlign: 'left' }}>
-        <h3>おすすめのジャンル</h3>
+        <h3>おすすめのジャンル（映画・アニメ・ドラマ）</h3>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <tbody>
             {movieGenres.map((genre, index) => (
-              <tr key={index} style={{ borderBottom: '1px solid gray' }}>
+              <tr key={index} style={{ borderBottom: '2px solid gray' }}>
                 <td style={{
                   backgroundColor: index === currentIndex ? 'red' : index === nextIndex ? 'blue' : 'lightgray', 
                   color: 'white', 
-                  padding: '8px',
+                  padding: '3px',
                   textAlign: 'center',
                   fontWeight: 'bold'
                 }}>
                   {genre.category}
                 </td>
-                <td style={{ padding: '5px', textAlign: 'left' }}>{genre.genres}</td>
+                <td style={{ padding: '2px', textAlign: 'left' }}>{genre.genres}</td>
               </tr>
             ))}
           </tbody>
