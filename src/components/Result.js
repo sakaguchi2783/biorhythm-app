@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 const categories = [
@@ -25,6 +25,16 @@ const Result = () => {
 
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
+      <style>
+        {`
+          @keyframes flash {
+            60% { opacity: 1; }
+            90% { opacity: 0.6; }
+            100% { opacity: 1; }
+          }
+        `}
+      </style>
+
       <h2>あなたの診断結果</h2>
 
       {/* 現在の状態と次に訪れる状態を2段で表示 */}
@@ -39,19 +49,13 @@ const Result = () => {
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            padding: '2px 15px', // サイズを調整
+            padding: '10px 30px', // サイズを調整
             backgroundColor: 'red', // 赤い角丸枠
             borderRadius: '10px', // 角丸
+            animation: 'flash 1s ease-in-out infinite alternate' // フラッシュ効果
           }}>
-            <div style={{
-              width: '0px',  // 赤い■のサイズを大きく
-              height: '0px', 
-              backgroundColor: 'red', // 赤い■
-              marginRight: '15px',
-              borderRadius: '6px'
-            }}></div>
             <p style={{ fontWeight: 'bold', color: 'white', fontSize: 'clamp(12px, 2vw, 24px)' }}>
-              現在の状態：<span style={{ color: 'white' }}>{categories[currentIndex]}</span>
+              現在のあなたの状態
             </p>
           </div>
         </div>
@@ -65,19 +69,13 @@ const Result = () => {
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            padding: '2px 15px', // サイズを調整
+            padding: '10px 30px', // サイズを調整
             backgroundColor: 'blue', // 青い角丸枠
-            borderRadius: '15px', // 角丸
+            borderRadius: '10px', // 角丸
+            animation: 'flash 1s ease-in-out infinite alternate' // フラッシュ効果
           }}>
-            <div style={{
-              width: '0px',  // 青い■のサイズを大きく
-              height: '0px', 
-              backgroundColor: 'blue', // 青い■
-              marginRight: '15px',
-              borderRadius: '1px'
-            }}></div>
             <p style={{ fontWeight: 'bold', color: 'white', fontSize: 'clamp(12px, 2vw, 24px)' }}>
-              約2週間後の状態：<span style={{ color: 'white' }}>{categories[nextIndex]}</span>
+              約2週間後のあなたの状態
             </p>
           </div>
         </div>
@@ -126,7 +124,8 @@ const Result = () => {
                 borderRadius: '12px', // 角丸を少し大きく
                 fontWeight: 'bold',
                 fontSize: 'clamp(10px, 1.5vw, 15px)',  // テキストのサイズを調整
-                zIndex: 2 // 枠を矢印より前に表示
+                zIndex: 2, // 枠を矢印より前に表示
+                animation: isCurrent || isNext ? 'flash 1s ease-in-out infinite alternate' : 'none' // フラッシュ効果を追加
               }}
             >
               {category}
@@ -185,17 +184,18 @@ const Result = () => {
                   color: 'white', 
                   padding: '3px',
                   textAlign: 'center',
-                  fontWeight: 'bold'
+                  fontWeight: 'bold',
+                  animation: index === currentIndex || index === nextIndex ? 'flash 1s ease-in-out infinite alternate' : 'none',  // フラッシュ効果をリストに追加
+                  fontSize: 'clamp(8px, 1.2vw, 10px)'  // 文字サイズを小さく
                 }}>
                   {genre.category}
                 </td>
-                <td style={{ padding: '2px', textAlign: 'left' }}>{genre.genres}</td>
+                <td style={{ padding: '2px', textAlign: 'left', fontSize: 'clamp(8px, 1.2vw, 10px)' }}>{genre.genres}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-
     </div>
   );
 };
