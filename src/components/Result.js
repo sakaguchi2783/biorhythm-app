@@ -55,7 +55,7 @@ const Result = () => {
             animation: 'flash 1s ease-in-out infinite alternate' // フラッシュ効果
           }}>
             <p style={{ fontWeight: 'bold', color: 'white', fontSize: 'clamp(12px, 2vw, 24px)' }}>
-              現在、あなた潜在的に見たい作品
+              今、あなたが潜在的に見たい作品
             </p>
           </div>
         </div>
